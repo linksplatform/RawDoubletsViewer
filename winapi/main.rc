@@ -1,0 +1,35 @@
+//
+// ÔÀÉË ÐÅÑÓÐÑÎÂ ÏÐÈËÎÆÅÍÈß
+//
+
+#include <windows.h>
+#include "resource.h"
+
+STRINGTABLE {
+	IDS_WNDCLASS,                       "Raw Links"
+	IDS_ABOUTTITLE,                     "About"
+	IDS_ABOUT,           "Raw LinksPlatform Doublets viewer v.1.0\n\tby _KROL"
+	// Columns
+	IDS_COL_No,                         "No."
+	IDS_COL_Source,                     "Source"
+	IDS_COL_Target,                     "Target"
+	IDS_COL_LasSrc,                     "Left as Src"
+	IDS_COL_LasTrg,                     "Left as Trg"
+	IDS_COL_RasSrc,                     "Right as Src"
+	IDS_COL_RasTrg,                     "Right as Trg"
+	IDS_COL_SrcSize,                    "Source Size"
+	IDS_COL_TrgSize,                    "Target Size"
+	IDDS_OPENTITLE,                     "Open file..."
+}
+
+IDM_MAINMENU MENU {
+	MENUITEM "&Open",                                   IDM_OPEN
+	MENUITEM "&About",                                  IDM_ABOUT
+}
+
+
+APP_ACCELERATORS ACCELERATORS {
+	"O",        IDM_OPEN,        VIRTKEY, CONTROL
+	VK_F1,      IDM_ABOUT,       VIRTKEY
+}
+
