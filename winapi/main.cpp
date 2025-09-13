@@ -1,11 +1,11 @@
 //
-// ОСНОВНОЙ МОДУЛЬ: MAIN.CPP
+// РћРЎРќРћР’РќРћР™ РњРћР”РЈР›Р¬: MAIN.CPP
 //
-// ОПИСАНИЕ ПРОГРАММЫ:
-//   Отображает структуру из файла базы данных проекта LinksPlatform.
+// РћРџРРЎРђРќРР• РџР РћР“Р РђРњРњР«:
+//   РћС‚РѕР±СЂР°Р¶Р°РµС‚ СЃС‚СЂСѓРєС‚СѓСЂСѓ РёР· С„Р°Р№Р»Р° Р±Р°Р·С‹ РґР°РЅРЅС‹С… РїСЂРѕРµРєС‚Р° LinksPlatform.
 //   See: https://github.com/linksplatform/Data.Doublets
 //
-// ЦЕЛЕВАЯ ПЛАТФОРМА: WINDOWS x86/64
+// Р¦Р•Р›Р•Р’РђРЇ РџР›РђРўР¤РћР РњРђ: WINDOWS x86/64
 //
 
 #include "include.h"
@@ -14,7 +14,7 @@
 #include "main.h"
 
 //
-// Глобальные константы
+// Р“Р»РѕР±Р°Р»СЊРЅС‹Рµ РєРѕРЅСЃС‚Р°РЅС‚С‹
 //
 const TCHAR *szNull     = TEXT("");
 const TCHAR *szFileMask = TEXT("*.links");
@@ -22,34 +22,34 @@ const TCHAR *szWildCard = TEXT("LinksPlatfrom Database File\0*.links\0\0");
 
 
 //
-// Глобальные переменные
+// Р“Р»РѕР±Р°Р»СЊРЅС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ
 //
-LinksPlatformDB db;                    // Основной экземпляр базы данных
-HINSTANCE hInst;                       // Экземпляр приложения
-HACCEL hAccelTable;                    // Таблица акселераторов
-HWND hListView;                        // Элемент управления ListView
-HWND hStatusBar;                       // Элемент управления StatusBar
-TCHAR szWindowClass[MAX_LOADSTRING];   // Имя класса главного окна
-TCHAR szAbout[MAX_LOADSTRING];         // Строка из диалога "О программе..."
-TCHAR szAboutTitle[MAX_LOADSTRING];    // Заголовок диалога "О программе..."
-TCHAR szError[MAX_LOADSTRING];         // Сообщение об ошибке
-TCHAR szOpenDlgTitle[MAX_LOADSTRING];  // Заголовок диалога открытия файла
-TCHAR szFilePath[MAX_PATH];            // Путь до текущего файла базы данных
+LinksPlatformDB db;                    // РћСЃРЅРѕРІРЅРѕР№ СЌРєР·РµРјРїР»СЏСЂ Р±Р°Р·С‹ РґР°РЅРЅС‹С…
+HINSTANCE hInst;                       // Р­РєР·РµРјРїР»СЏСЂ РїСЂРёР»РѕР¶РµРЅРёСЏ
+HACCEL hAccelTable;                    // РўР°Р±Р»РёС†Р° Р°РєСЃРµР»РµСЂР°С‚РѕСЂРѕРІ
+HWND hListView;                        // Р­Р»РµРјРµРЅС‚ СѓРїСЂР°РІР»РµРЅРёСЏ ListView
+HWND hStatusBar;                       // Р­Р»РµРјРµРЅС‚ СѓРїСЂР°РІР»РµРЅРёСЏ StatusBar
+TCHAR szWindowClass[MAX_LOADSTRING];   // РРјСЏ РєР»Р°СЃСЃР° РіР»Р°РІРЅРѕРіРѕ РѕРєРЅР°
+TCHAR szAbout[MAX_LOADSTRING];         // РЎС‚СЂРѕРєР° РёР· РґРёР°Р»РѕРіР° "Рћ РїСЂРѕРіСЂР°РјРјРµ..."
+TCHAR szAboutTitle[MAX_LOADSTRING];    // Р—Р°РіРѕР»РѕРІРѕРє РґРёР°Р»РѕРіР° "Рћ РїСЂРѕРіСЂР°РјРјРµ..."
+TCHAR szError[MAX_LOADSTRING];         // РЎРѕРѕР±С‰РµРЅРёРµ РѕР± РѕС€РёР±РєРµ
+TCHAR szOpenDlgTitle[MAX_LOADSTRING];  // Р—Р°РіРѕР»РѕРІРѕРє РґРёР°Р»РѕРіР° РѕС‚РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р°
+TCHAR szFilePath[MAX_PATH];            // РџСѓС‚СЊ РґРѕ С‚РµРєСѓС‰РµРіРѕ С„Р°Р№Р»Р° Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 
 
 //
-//   ФУНКЦИЯ: int _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
+//   Р¤РЈРќРљР¦РРЇ: int _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 //
-//   НАЗНАЧЕНИЕ: точка входа для приложения
+//   РќРђР—РќРђР§Р•РќРР•: С‚РѕС‡РєР° РІС…РѕРґР° РґР»СЏ РїСЂРёР»РѕР¶РµРЅРёСЏ
 //
 int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
                        LPTSTR    lpCmdLine, int       nCmdShow) {
 	UNREFERENCED_PARAMETER(hPrevInstance);
-	// Приложение не будет обрабатывать командую строку
+	// РџСЂРёР»РѕР¶РµРЅРёРµ РЅРµ Р±СѓРґРµС‚ РѕР±СЂР°Р±Р°С‚С‹РІР°С‚СЊ РєРѕРјР°РЅРґСѓСЋ СЃС‚СЂРѕРєСѓ
 	UNREFERENCED_PARAMETER(lpCmdLine);
 	HWND hWnd;
 
-	// Инициализация глобальных переменных, загрузка некоторых ресурсов
+	// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РіР»РѕР±Р°Р»СЊРЅС‹С… РїРµСЂРµРјРµРЅРЅС‹С…, Р·Р°РіСЂСѓР·РєР° РЅРµРєРѕС‚РѕСЂС‹С… СЂРµСЃСѓСЂСЃРѕРІ
 	LoadString(hInstance, IDS_WNDCLASS, szWindowClass, MAX_LOADSTRING);
 	LoadString(hInstance, IDS_ABOUTTITLE, szAboutTitle, MAX_LOADSTRING);
 	LoadString(hInstance, IDS_ABOUT, szAbout, MAX_LOADSTRING);
@@ -57,17 +57,17 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LoadString(hInstance, IDDS_OPENTITLE, szOpenDlgTitle, MAX_LOADSTRING);
 	hAccelTable = LoadAccelerators(hInstance, TEXT("APP_ACCELERATORS"));
 
-	// Регистрация класса окна
+	// Р РµРіРёСЃС‚СЂР°С†РёСЏ РєР»Р°СЃСЃР° РѕРєРЅР°
 	if (!RegisterWndClass())
 		return false;
 
-	// Создание окна и элементов управления
+	// РЎРѕР·РґР°РЅРёРµ РѕРєРЅР° Рё СЌР»РµРјРµРЅС‚РѕРІ СѓРїСЂР°РІР»РµРЅРёСЏ
 	hWnd = InitWnd();
 	if (!hWnd)
 		return false;
 
 	MSG msg;
-	// Цикл обработки сообщений приложения
+	// Р¦РёРєР» РѕР±СЂР°Р±РѕС‚РєРё СЃРѕРѕР±С‰РµРЅРёР№ РїСЂРёР»РѕР¶РµРЅРёСЏ
 	while (GetMessage(&msg, NULL, 0, 0)) {
 		if (!TranslateAccelerator(hWnd, hAccelTable, &msg)) {
 			TranslateMessage(&msg);
@@ -79,14 +79,14 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 
 //
-// ФУНКЦИЯ: ATOM RegisterWndClass()
+// Р¤РЈРќРљР¦РРЇ: ATOM RegisterWndClass()
 //
-// НАЗНАЧЕНИЕ: регистрирует класс окна
+// РќРђР—РќРђР§Р•РќРР•: СЂРµРіРёСЃС‚СЂРёСЂСѓРµС‚ РєР»Р°СЃСЃ РѕРєРЅР°
 //
-// ВОЗВРАТИТЬ: флаг успеха выполнения операции
+// Р’РћР—Р’Р РђРўРРўР¬: С„Р»Р°Рі СѓСЃРїРµС…Р° РІС‹РїРѕР»РЅРµРЅРёСЏ РѕРїРµСЂР°С†РёРё
 //
 ATOM RegisterWndClass() {
-	// Регистрируем класс окна
+	// Р РµРіРёСЃС‚СЂРёСЂСѓРµРј РєР»Р°СЃСЃ РѕРєРЅР°
 	WNDCLASSEX  wcex;
 	ATOM        aReturn;
 
@@ -105,7 +105,7 @@ ATOM RegisterWndClass() {
 	                       IDI_APPLICATION, IMAGE_ICON,
 	                       16, 16, 0);
 	aReturn = RegisterClassEx(&wcex);
-	// Поддержка для предыдущих версий Windows(NT 4.5? =)
+	// РџРѕРґРґРµСЂР¶РєР° РґР»СЏ РїСЂРµРґС‹РґСѓС‰РёС… РІРµСЂСЃРёР№ Windows(NT 4.5? =)
 	if (!aReturn) {
 		WNDCLASS wc;
 		wc.style          = 0;
@@ -125,11 +125,11 @@ ATOM RegisterWndClass() {
 
 
 //
-// ФУНКЦИЯ: WHND InitWnd()
+// Р¤РЈРќРљР¦РРЇ: WHND InitWnd()
 //
-// НАЗНАЧЕНИЕ: создаёт окно и элементы управление, отображает окно
+// РќРђР—РќРђР§Р•РќРР•: СЃРѕР·РґР°С‘С‚ РѕРєРЅРѕ Рё СЌР»РµРјРµРЅС‚С‹ СѓРїСЂР°РІР»РµРЅРёРµ, РѕС‚РѕР±СЂР°Р¶Р°РµС‚ РѕРєРЅРѕ
 //
-// ВОЗВРАТИТЬ: идетификатор окна / NULL
+// Р’РћР—Р’Р РђРўРРўР¬: РёРґРµС‚РёС„РёРєР°С‚РѕСЂ РѕРєРЅР° / NULL
 //
 HWND InitWnd() {
 	HWND hWnd = CreateWindow(szWindowClass, szFilePath,
@@ -150,11 +150,11 @@ HWND InitWnd() {
 
 
 //
-// ФУНКЦИЯ: bool InitListView(HWND)
+// Р¤РЈРќРљР¦РРЇ: bool InitListView(HWND)
 //
-// НАЗНАЧЕНИЕ: создаёт элемент управления ListView
+// РќРђР—РќРђР§Р•РќРР•: СЃРѕР·РґР°С‘С‚ СЌР»РµРјРµРЅС‚ СѓРїСЂР°РІР»РµРЅРёСЏ ListView
 //
-// ВОЗВРАТИТЬ: флаг успеха выполнения операции
+// Р’РћР—Р’Р РђРўРРўР¬: С„Р»Р°Рі СѓСЃРїРµС…Р° РІС‹РїРѕР»РЅРµРЅРёСЏ РѕРїРµСЂР°С†РёРё
 //
 bool InitListView(HWND hWnd) {
 	INT dwStyle = WS_TABSTOP |
@@ -193,11 +193,11 @@ bool InitListView(HWND hWnd) {
 
 
 //
-// ФУНКЦИЯ: bool InitStatusBar(HWND)
+// Р¤РЈРќРљР¦РРЇ: bool InitStatusBar(HWND)
 //
-// НАЗНАЧЕНИЕ: создаёт элемент управления StatusBar
+// РќРђР—РќРђР§Р•РќРР•: СЃРѕР·РґР°С‘С‚ СЌР»РµРјРµРЅС‚ СѓРїСЂР°РІР»РµРЅРёСЏ StatusBar
 //
-// ВОЗВРАТИТЬ: флаг успеха выполнения операции
+// Р’РћР—Р’Р РђРўРРўР¬: С„Р»Р°Рі СѓСЃРїРµС…Р° РІС‹РїРѕР»РЅРµРЅРёСЏ РѕРїРµСЂР°С†РёРё
 //
 bool InitStatusBar(HWND hWnd) {
 	INT dwStyle = WS_CHILD | WS_VISIBLE;
@@ -216,14 +216,14 @@ bool InitStatusBar(HWND hWnd) {
 
 
 //
-// ФУНКЦИЯ: WndProc(HWND, UINT, WPARAM, LPARAM)
+// Р¤РЈРќРљР¦РРЇ: WndProc(HWND, UINT, WPARAM, LPARAM)
 //
-// НАЗНАЧЕНИЕ: обрабатывает сообщения в главном окне
+// РќРђР—РќРђР§Р•РќРР•: РѕР±СЂР°Р±Р°С‚С‹РІР°РµС‚ СЃРѕРѕР±С‰РµРЅРёСЏ РІ РіР»Р°РІРЅРѕРј РѕРєРЅРµ
 //
-// WM_COMMAND	- обработка меню приложения
-// WM_NOTIFY	- обработка запросов отображения базы данных в ListView
-// WM_SIZE      - обновить отображение окна
-// WM_DESTROY	- ввести сообщение о выходе и вернуться
+// WM_COMMAND	- РѕР±СЂР°Р±РѕС‚РєР° РјРµРЅСЋ РїСЂРёР»РѕР¶РµРЅРёСЏ
+// WM_NOTIFY	- РѕР±СЂР°Р±РѕС‚РєР° Р·Р°РїСЂРѕСЃРѕРІ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ Р±Р°Р·С‹ РґР°РЅРЅС‹С… РІ ListView
+// WM_SIZE      - РѕР±РЅРѕРІРёС‚СЊ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ РѕРєРЅР°
+// WM_DESTROY	- РІРІРµСЃС‚Рё СЃРѕРѕР±С‰РµРЅРёРµ Рѕ РІС‹С…РѕРґРµ Рё РІРµСЂРЅСѓС‚СЊСЃСЏ
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam,
                          LPARAM lParam) {
@@ -259,7 +259,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam,
 			itemid = lpdi->item.iItem;
 			switch (lpdi->hdr.code) {
 				case LVN_GETDISPINFO:
-					// Нужна информация о значениях?
+					// РќСѓР¶РЅР° РёРЅС„РѕСЂРјР°С†РёСЏ Рѕ Р·РЅР°С‡РµРЅРёСЏС…?
 					if (lpdi->item.mask & LVIF_TEXT) {
 						TCHAR buf[25];
 						switch(lpdi->item.iSubItem) {
@@ -318,9 +318,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam,
 
 
 //
-// ФУНКЦИЯ: RefreshWindow(HWND)
+// Р¤РЈРќРљР¦РРЇ: RefreshWindow(HWND)
 //
-// НАЗНАЧЕНИЕ: обновляет элементы главного окна
+// РќРђР—РќРђР§Р•РќРР•: РѕР±РЅРѕРІР»СЏРµС‚ СЌР»РµРјРµРЅС‚С‹ РіР»Р°РІРЅРѕРіРѕ РѕРєРЅР°
 //
 void RefreshWindow(HWND hWnd) {
 	ListView_SetItemCount(hListView, db.length());
@@ -346,9 +346,9 @@ void RefreshWindow(HWND hWnd) {
 
 
 //
-// ФУНКЦИЯ: LPTSTR OpenFileDialog(LPTSTR, LPTSTR, HWND)
+// Р¤РЈРќРљР¦РРЇ: LPTSTR OpenFileDialog(LPTSTR, LPTSTR, HWND)
 //
-// НАЗНАЧЕНИЕ: обработать диалог открытия файла
+// РќРђР—РќРђР§Р•РќРР•: РѕР±СЂР°Р±РѕС‚Р°С‚СЊ РґРёР°Р»РѕРі РѕС‚РєСЂС‹С‚РёСЏ С„Р°Р№Р»Р°
 //
 LPTSTR OpenFileDialog(LPTSTR Title, LPCTSTR Filter, HWND hWnd) {
 	OPENFILENAME ofn;
